@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tasker</title>
+    <link rel="stylesheet" href="http://mtcanvas.com/css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://zevanrosser.github.com/jquery.select-all/jquery.select-all.js"></script>
+    <script src="js/tasker.js"></script>
+  </head>
+  <body>
+    
+    <code id="main-ui" style="display:none">
+      <div id="top-ui">
+        <h2>Tasker</h2>
+        <form id="add-form" data-var="addForm">
+          <input type="text" data-var="title" placeholder="task list name"/>
+          <input type="submit" value="add" /> 
+        </form> 
+        <button id="clear-all" data-var="clearAll">clear all</button>
+        </div>
+        <div data-var="taskContainer" id="task-container"></div> 
+    </code>
+    
+    <code id="task-list" style="display:none">
+      <div class="task-list">
+        <span class="title">~title</span>
+        <button class="close">X</button>
+        <form class="add-form">
+          <input type="text" data-var="newTask" class="new-task" placeholder="task"/>
+          <input type="submit" value="add" /> 
+        </form> 
+        <div class="tasks">
+        </div>
+        <div class="feedback">0/0 completed</div>
+      </div>
+    </code>
+    
+    <code id="task" style="display:none">
+      <div class="task">
+        <span class="little-btn">x&nbsp;</span>
+        <input type="checkbox" class="check" data-var="check" /><span>~text</span>
+      </div>
+    </code>
+  </body>
+</html>
