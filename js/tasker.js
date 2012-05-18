@@ -11,16 +11,26 @@ $(function() {
 
     self.update = function() {
       win.trigger("arrange");
+      if (localStorage.tasker) {
+        self.taskContainer.html(localStorage.tasker);
+        self.clearAll.prop("disabled", false);
+      } else {
+        self.clearAll.prop("disabled", true);
+      }
     };
     
+    self.update();
+
     self.save = function() {
       localStorage.tasker = self.taskContainer.html();
       self.update();
     };
 
-    if (localStorage.tasker) {
-      self.taskContainer.html(localStorage.tasker);
-    }
+    self.clearAll.click(function() {
+      if (confirm("Are you sure you want to clear all your task lists?")) {
+        localStorage.tasker = "";
+      }
+    });
 
     self.addForm.submit(function(e) {
       e.preventDefault();
@@ -133,6 +143,6 @@ $(function() {
         });
       }
     }
-  }).trigger("resize");
+  });
 
 });
