@@ -22,13 +22,14 @@
         </form> 
         
       </div>
-      <div data-var="taskContainer" id="task-container"></div> 
+      <div data-var="taskContainer" id="task-container"></div>
     </code>
     
     <code id="task-list" style="display:none">
       <div class="task-list">
-        <span class="title">~title</span>
         <button class="close">X</button>
+        <span class="title">~title</span>
+        
         <form class="add-form">
           <input type="text" data-var="newTask" class="new-task" placeholder="task"/>
           <input type="submit" value="add" /> 
@@ -42,7 +43,7 @@
     <code id="task" style="display:none">
       <div class="task">
         <span class="little-btn">x&nbsp;</span>
-        <input type="checkbox" class="check" data-var="check" /><span>~text</span>
+        <input type="checkbox" class="check" data-var="check" /> <span>~text</span>
       </div>
     </code>
   </body>
