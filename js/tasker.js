@@ -1,7 +1,12 @@
 $(function() {
 
   var doc = $(document),
-      win = $(window);
+      win = $(window), 
+      messages = {
+        clearAll : "Are you sure you want to clear all your task lists?", 
+        removeTaskList : "Are you sure you want to remove this task list?",
+        removeTask : "Are you sure you want to remove this task?"
+      };
 
   var tasker = new Tasker();
 
@@ -35,8 +40,9 @@ $(function() {
     };
 
     self.clearAll.click(function() {
-      if (confirm("Are you sure you want to clear all your task lists?")) {
+      if (confirm(messages.clearAll)) {
         localStorage.tasker = "";  
+        self.taskContainer.html("");
         self.update();
       }
     });
@@ -76,7 +82,7 @@ $(function() {
     });
     tasker.save();
   }).on("click", ".close", function() {
-    if (confirm("Are you sure you want to remove this task list?")) {
+    if (confirm(messages.removeTaskList)) {
       $(this).parent().remove();
       tasker.save();
     }
@@ -114,7 +120,7 @@ $(function() {
     feedback.text(checked + "/" + checkNum + " completed");
     tasker.save();
   }).on("click", ".little-btn", function() {
-    if (confirm("Are you sure you want to remove this task?")) {
+    if (confirm(messages.removeTask)) {
       $(this).parent().remove();
       tasker.save();
     }
