@@ -19,7 +19,7 @@ $(function() {
         top = 20;
     
     taskLists.css({
-      left: margin,
+      left: (winWidth - (cols * size)) / 2 - 5,
       top: top
     });
     
