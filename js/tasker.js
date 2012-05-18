@@ -9,26 +9,35 @@ $(function() {
     var self = this;
     self.elem = $("#main-ui").selectAll(self).appendTo("body");
 
-    self.update = function() {
-      win.trigger("arrange");
-      if (localStorage.tasker) {
-        self.taskContainer.html(localStorage.tasker);
-        self.clearAll.prop("disabled", false);
-      } else {
-        self.clearAll.prop("disabled", true);
+    if (localStorage.tasker) {
+      self.taskContainer.html(localStorage.tasker);
+    } 
+    
+    self.updateClearAll = function(){
+      if (self.taskContainer.html() == ""){
+        self.clearAll.prop("disabled", true); 
+      }else{
+        self.clearAll.prop("disabled", false); 
       }
     };
-    
+    self.updateClearAll();
+
+    self.update = function() {
+      win.trigger("arrange");
+      self.updateClearAll();
+    };
+
     self.update();
 
     self.save = function() {
-      localStorage.tasker = self.taskContainer.html();
       self.update();
+      localStorage.tasker = self.taskContainer.html();
     };
 
     self.clearAll.click(function() {
       if (confirm("Are you sure you want to clear all your task lists?")) {
-        localStorage.tasker = "";
+        localStorage.tasker = "";  
+        self.update();
       }
     });
 
@@ -39,9 +48,9 @@ $(function() {
       var taskList = new TaskList(value);
       self.title.val("");
       taskList.elem.prependTo(self.taskContainer);
-      taskList.newTask.focus();
-      win.trigger("resize");
+      win.trigger("arrange");
       self.save();
+      taskList.newTask.focus();
     });
   };
 
@@ -133,9 +142,7 @@ $(function() {
       });
 
       if (i >= cols) {
-
         var above = taskLists.eq(i - cols);
-        console.log(above.find("span").text(), i);
         var abovePos = above.position();
         curr.css({
           left: abovePos.left,
