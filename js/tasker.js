@@ -51,24 +51,24 @@ $(function() {
       self.taskContainer.html(localStorage.tasker);
     }
     
-    self.updateClearAll = function() {
+    function updateClearAll() {
       if (self.taskContainer.html() == "") {
         self.clearAll.prop("disabled", true);
       } else {
         self.clearAll.prop("disabled", false);
       }
-    };
-    self.updateClearAll();
+    }
+    updateClearAll();
 
-    self.update = function() {
+    function update(){
       win.trigger("arrange");
-      self.updateClearAll();
-    };
+      updateClearAll();
+    }
 
-    self.update();
+    update();
 
     self.save = function() {
-      self.update();
+      update();
       localStorage.tasker = self.taskContainer.html();
     };
 
@@ -115,6 +115,13 @@ $(function() {
   }).on("click", ".close", function() {
     if (confirm(messages.removeTaskList)) {
       $(this).parent().remove();
+      tasker.save();
+    }
+  }).on("click", ".title", function(){
+    var curr = $(this);
+    var newTitle = prompt("Rename task '" + curr.text() + "' to:");
+    if (newTitle){
+      curr.text(newTitle); 
       tasker.save();
     }
   });
