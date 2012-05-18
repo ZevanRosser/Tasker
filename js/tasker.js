@@ -1,14 +1,47 @@
 $(function() {
 
   var doc = $(document),
-      win = $(window), 
+      win = $(window),
       messages = {
-        clearAll : "Are you sure you want to clear all your task lists?", 
-        removeTaskList : "Are you sure you want to remove this task list?",
-        removeTask : "Are you sure you want to remove this task?"
-      };
+        clearAll: "Are you sure you want to clear all your task lists?",
+        removeTaskList: "Are you sure you want to remove this task list?",
+        removeTask: "Are you sure you want to remove this task?"
+      },
+      tasker = new Tasker();
 
-  var tasker = new Tasker();
+  win.on("resize arrange", function() {
+    var taskLists = $("#task-container .task-list"),
+        size = taskLists.eq(0).outerWidth() + 5,
+        num = taskLists.length,
+        winWidth = win.width(),
+        cols = Math.floor(winWidth / size),
+        margin = 5,
+        top = 20;
+    
+    taskLists.css({
+      left: margin,
+      top: top
+    });
+    
+    for (var i = 1; i < num; i++) {
+      var pre = taskLists.eq(i - 1);
+      var curr = taskLists.eq(i);
+      var prePos = pre.position();
+      curr.css({
+        top: top,
+        left: prePos.left + pre.outerWidth() + margin
+      });
+
+      if (i >= cols) {
+        var above = taskLists.eq(i - cols);
+        var abovePos = above.position();
+        curr.css({
+          left: abovePos.left,
+          top: abovePos.top + above.outerHeight() + margin
+        });
+      }
+    }
+  }).trigger("arrange");
 
   function Tasker() {
     var self = this;
@@ -16,13 +49,13 @@ $(function() {
 
     if (localStorage.tasker) {
       self.taskContainer.html(localStorage.tasker);
-    } 
+    }
     
-    self.updateClearAll = function(){
-      if (self.taskContainer.html() == ""){
-        self.clearAll.prop("disabled", true); 
-      }else{
-        self.clearAll.prop("disabled", false); 
+    self.updateClearAll = function() {
+      if (self.taskContainer.html() == "") {
+        self.clearAll.prop("disabled", true);
+      } else {
+        self.clearAll.prop("disabled", false);
       }
     };
     self.updateClearAll();
@@ -41,7 +74,7 @@ $(function() {
 
     self.clearAll.click(function() {
       if (confirm(messages.clearAll)) {
-        localStorage.tasker = "";  
+        localStorage.tasker = "";
         self.taskContainer.html("");
         self.update();
       }
@@ -77,9 +110,7 @@ $(function() {
     task.elem.appendTo(container);
     task.check.trigger("evalchecks");
     text.val("");
-    parent.css({
-      backgroundColor: "white"
-    });
+    parent.removeClass("complete");
     tasker.save();
   }).on("click", ".close", function() {
     if (confirm(messages.removeTaskList)) {
@@ -100,9 +131,7 @@ $(function() {
         checks = parent.find(".check"),
         checkNum = checks.length,
         checked = 0;
-    taskList.css({
-      backgroundColor: "white"
-    });
+    taskList.removeClass("complete");
     checks.each(function() {
       var check = $(this);
       if (check.prop("checked")) {
@@ -112,9 +141,7 @@ $(function() {
         check.attr("checked", false);
       }
       if (checked == checkNum) {
-        taskList.css({
-          backgroundColor: "#c5ebdd"
-        });
+        taskList.addClass("complete");
       }
     });
     feedback.text(checked + "/" + checkNum + " completed");
@@ -123,38 +150,6 @@ $(function() {
     if (confirm(messages.removeTask)) {
       $(this).parent().remove();
       tasker.save();
-    }
-  });
-
-  win.on("resize arrange", function() {
-    var taskLists = $("#task-container .task-list");
-    var size = taskLists.eq(0).outerWidth() + 5;
-    var num = taskLists.length;
-    var winWidth = win.width();
-    var cols = Math.floor(winWidth / size);
-    var margin = 5;
-    var top = 20;
-    taskLists.css({
-      left: margin,
-      top: top
-    });
-    for (var i = 1; i < num; i++) {
-      var pre = taskLists.eq(i - 1);
-      var curr = taskLists.eq(i);
-      var prePos = pre.position();
-      curr.css({
-        top: top,
-        left: prePos.left + pre.outerWidth() + margin
-      });
-
-      if (i >= cols) {
-        var above = taskLists.eq(i - cols);
-        var abovePos = above.position();
-        curr.css({
-          left: abovePos.left,
-          top: abovePos.top + above.outerHeight() + margin
-        });
-      }
     }
   });
 

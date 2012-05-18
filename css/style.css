@@ -10,21 +10,31 @@ h2{
 div{
   position : relative; 
 }
+input[type=text]{
+  margin : 10px 5px 10px 2px;
+  border : 1px solid #ccc;
+  width : 200px;
+  padding  : 5px;
+}
 #top-ui{
   padding : 10px; 
   border-bottom : 1px solid #ccc;
   overflow : hidden;
 }
+#clear-all{
+  margin-top : -32px;
+}
 #add-form{ 
   float : left; 
 }
 #task-container{
-  
   margin : 0 10px 0 10px;
 }
 .title{
+  padding-top : 4px;
   font-size : 20px; 
 }
+
 #clear-all{
   float : right; 
   margin-left : 50px;
@@ -36,6 +46,7 @@ div{
   border : 1px solid #ccc;
   float : left;
   width : 300px;
+  background-color : white;
 }
 .task{
   padding : 5px; 
@@ -52,4 +63,11 @@ div{
 }
 .feedback{
   padding-top : 5px; 
+}
+
+.complete{
+  background-color : #c6e6c9 !important;
+}
+.complete .feedback{
+  color : #518757;
 }

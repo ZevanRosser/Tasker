@@ -5,6 +5,7 @@
     <title>Tasker</title>
     <link rel="stylesheet" href="http://mtcanvas.com/css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://zevanrosser.github.com/jquery.select-all/jquery.select-all.js"></script>
     <script src="js/tasker.js"></script>
@@ -14,13 +15,14 @@
     <code id="main-ui" style="display:none">
       <div id="top-ui">
         <h2>Tasker</h2>
+        <button id="clear-all" data-var="clearAll">clear all</button>
         <form id="add-form" data-var="addForm">
           <input type="text" data-var="title" placeholder="task list name"/>
           <input type="submit" value="add" /> 
         </form> 
-        <button id="clear-all" data-var="clearAll">clear all</button>
-        </div>
-        <div data-var="taskContainer" id="task-container"></div> 
+        
+      </div>
+      <div data-var="taskContainer" id="task-container"></div> 
     </code>
     
     <code id="task-list" style="display:none">
