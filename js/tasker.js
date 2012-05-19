@@ -43,9 +43,11 @@ $(function() {
         });
       }
     }
-    taskListContainer.css({
-       height : curr.position().top + curr.height()
-    });
+    if (curr){
+      taskListContainer.css({
+         height : curr.position().top + curr.height()
+      });
+    }
     
     win.scrollTop(scroll);
   }).trigger("arrange");
@@ -141,6 +143,8 @@ $(function() {
     var curr = $(this),
         parent = curr.parent().parent(),
         taskList = parent.parent(),
+        bar = taskList.find(".bar"),
+        well = taskList.find(".well"),
         feedback = taskList.find(".feedback"),
         checks = parent.find(".check"),
         checkNum = checks.length,
@@ -159,12 +163,13 @@ $(function() {
       }
     });
     feedback.text(checked + "/" + checkNum + " completed");
+    well.css({width : (checked/checkNum) * bar.width()});
     tasker.save();
   }).on("click", ".little-btn", function() {
     if (confirm(messages.removeTask)) {
       $(this).parent().remove();
       tasker.save();
     }
-  });
+  }).trigger("evalchecks");
 
 });

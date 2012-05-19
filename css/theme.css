@@ -30,3 +30,9 @@ input[type=text]{
  background-color : white;
 }
 
+.bar{
+ border : 1px solid #9aafb8;
+}
+.well{
+ background-color : #9aafb8; 
+}

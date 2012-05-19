@@ -49,6 +49,19 @@ input[type=text]{
   width : 300px;
   background-color : white;
 }
+.bar{
+ margin-top : 8px;
+ width : 50px;
+ height : 10px; 
+ border : 1px solid #666;
+ float : right;
+  
+}
+.well{
+ width : 0px;
+ height : 10px;
+ background-color : #666;  
+}
 .task{
   padding : 5px; 
 }
@@ -63,6 +76,7 @@ input[type=text]{
   color : red;
 }
 .feedback{
+  float : left;
   padding-top : 5px; 
 }
 .complete{
