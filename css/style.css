@@ -28,7 +28,9 @@ input[type=text]{
   float : left; 
 }
 #task-container{
-  margin : 0 10px 0 10px;
+  position : relative;
+  margin : 0 10px 10px 10px;
+  padding-bottom : 20px;
 }
 .title{
   padding-top : 4px;
@@ -44,7 +46,6 @@ input[type=text]{
   top : 100px;
   padding : 10px;
   border : 1px solid #ccc;
-  float : left;
   width : 300px;
   background-color : white;
 }
