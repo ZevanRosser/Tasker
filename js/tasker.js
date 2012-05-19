@@ -10,6 +10,7 @@ $(function() {
       tasker = new Tasker();
 
   win.on("resize arrange", function() {
+    var scroll = win.scrollTop();
     var taskLists = $("#task-container .task-list"),
         size = taskLists.eq(0).outerWidth() + 5,
         num = taskLists.length,
@@ -41,6 +42,7 @@ $(function() {
         });
       }
     }
+    win.scrollTop(scroll);
   }).trigger("arrange");
 
   function Tasker() {
