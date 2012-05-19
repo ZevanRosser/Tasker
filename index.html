@@ -12,7 +12,8 @@
   </head>
   <body>
     
-    <code id="main-ui" style="display:none">
+    <script id="main-ui" type="text/html">
+      
       <div id="top-ui">
         <h2>Tasker</h2>
         <button id="clear-all" data-var="clearAll">clear all</button>
@@ -20,12 +21,13 @@
           <input type="text" data-var="title" placeholder="task list name"/>
           <input type="submit" value="add" /> 
         </form> 
-        
-      </div>
+      
+    </div>
       <div data-var="taskContainer" id="task-container"></div>
-    </code>
+      
+    </script>
     
-    <code id="task-list" style="display:none">
+    <script id="task-list" type="text/html">
       <div class="task-list">
         <button class="close">X</button>
         <span class="title">~title</span>
@@ -38,13 +40,13 @@
         </div>
         <div class="feedback">0/0 completed</div>
       </div>
-    </code>
+    </script>
     
-    <code id="task" style="display:none">
+    <script id="task" type="text/html">
       <div class="task">
         <span class="little-btn">x&nbsp;</span>
         <input type="checkbox" class="check" data-var="check" /> <span>~text</span>
-      </div>
-    </code>
+    </div>
+    </script>
   </body>
 </html>
