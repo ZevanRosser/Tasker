@@ -3,9 +3,9 @@ $(function() {
   var doc = $(document),
       win = $(window),
       messages = {
-        clearAll: "Are you sure you want to clear all your task lists?",
-        removeTaskList: "Are you sure you want to remove this task list?",
-        removeTask: "Are you sure you want to remove this task?"
+      clearAll: "Are you sure you want to clear all your task lists?",
+      removeTaskList: "Are you sure you want to remove this task list?",
+      removeTask: "Are you sure you want to remove this task?"
       },
       tasker = new Tasker();
 
@@ -19,12 +19,12 @@ $(function() {
         cols = Math.floor(winWidth / size),
         margin = 5,
         top = 20;
-    
+
     taskLists.css({
       left: (winWidth - (cols * size)) / 2 - 5,
       top: top
     });
-    
+
     for (var i = 1; i < num; i++) {
       var pre = taskLists.eq(i - 1);
       var curr = taskLists.eq(i);
@@ -43,12 +43,12 @@ $(function() {
         });
       }
     }
-    if (curr){
+    if (curr) {
       taskListContainer.css({
-         height : curr.position().top + curr.height()
+        height: curr.position().top + curr.height()
       });
     }
-    
+
     win.scrollTop(scroll);
   }).trigger("arrange");
 
@@ -59,7 +59,7 @@ $(function() {
     if (localStorage.tasker) {
       self.taskContainer.html(localStorage.tasker);
     }
-    
+
     function updateClearAll() {
       if (self.taskContainer.html() == "") {
         self.clearAll.prop("disabled", true);
@@ -69,7 +69,7 @@ $(function() {
     }
     updateClearAll();
 
-    function update(){
+    function update() {
       win.trigger("arrange");
       updateClearAll();
     }
@@ -126,11 +126,11 @@ $(function() {
       $(this).parent().remove();
       tasker.save();
     }
-  }).on("click", ".title", function(){
+  }).on("click", ".title", function() {
     var curr = $(this);
     var newTitle = prompt("Rename task '" + curr.text() + "' to:");
-    if (newTitle){
-      curr.text(newTitle); 
+    if (newTitle) {
+      curr.text(newTitle);
       tasker.save();
     }
   });
@@ -141,9 +141,21 @@ $(function() {
   };
   doc.on("click evalchecks", ".check", function() {
     var curr = $(this),
-        parent = curr.parent().parent(),
-        taskList = parent.parent(),
-        bar = taskList.find(".bar"),
+        tasks = curr.parent().parent(),
+        taskList = tasks.parent();
+    evalChecks(tasks, taskList);
+  }).on("click", ".little-btn", function() {
+    if (confirm(messages.removeTask)) {
+      var task = $(this).parent(),
+          tasks = task.parent(), 
+          taskList = tasks.parent();
+      task.remove();
+      evalChecks(tasks, taskList);
+    }
+  });
+
+  function evalChecks(parent, taskList) {
+    var bar = taskList.find(".bar"),
         well = taskList.find(".well"),
         feedback = taskList.find(".feedback"),
         checks = parent.find(".check"),
@@ -163,13 +175,11 @@ $(function() {
       }
     });
     feedback.text(checked + "/" + checkNum + " completed");
-    well.css({width : (checked/checkNum) * bar.width()});
+    well.css({
+      width: (checked / checkNum) * bar.width()
+    });
     tasker.save();
-  }).on("click", ".little-btn", function() {
-    if (confirm(messages.removeTask)) {
-      $(this).parent().remove();
-      tasker.save();
-    }
-  }).trigger("evalchecks");
+  }
+
 
 });
