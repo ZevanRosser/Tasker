@@ -2,15 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" /> 
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="gray" /> 
     <title>Tasker</title>
     <link rel="stylesheet" href="http://mtcanvas.com/css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/theme.css">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
     <script src="http://zevanrosser.github.com/jquery.select-all/jquery.select-all.js"></script>
     <script src="js/tasker.js"></script>
   </head>
   <body>
+    
     
     <script id="main-ui" type="text/html">
       
@@ -18,11 +22,12 @@
         <h2>Tasker</h2>
         <button id="clear-all" data-var="clearAll">clear all</button>
         <form id="add-form" data-var="addForm">
-          <input type="text" data-var="title" placeholder="task list name"/>
+          <input type="text" data-var="title" placeholder="task list name" autocorrect="off" autocapitalize="off"/>
           <input type="submit" value="add" /> 
         </form> 
+        
+      </div>
       
-    </div>
       <div data-var="taskContainer" id="task-container"></div>
       
     </script>
@@ -33,7 +38,7 @@
         <span class="title">~title</span>
         
         <form class="add-form">
-          <input type="text" data-var="newTask" class="new-task" placeholder="task"/>
+          <input type="text" data-var="newTask" class="new-task" placeholder="task" autocorrect="off" autocapitalize="off"/>
           <input type="submit" value="add" /> 
         </form> 
         <div class="tasks">
@@ -47,7 +52,7 @@
       <div class="task">
         <span class="little-btn">x&nbsp;</span>
         <input type="checkbox" class="check" data-var="check" /> <span>~text</span>
-    </div>
+      </div>
     </script>
   </body>
 </html>
